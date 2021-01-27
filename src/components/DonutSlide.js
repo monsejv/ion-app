@@ -6,12 +6,12 @@ import CircularSlider from '@fseehawer/react-circular-slider';
 function DonutSlide (props) {
     const [ months, setMonth ] = useState( 60 )
 
-
     const monthHandler = value => {
-        setMonth( value )
+        setMonth(value)
     }
 
-    const monthlyPayment = (( 350000.00 * 0.166 ) / months).toFixed(2)
+    const negativeMonths =  `-${months} `
+    const monthlyPayments = (( 0.166 * 350000 ) / (1 - Math.pow(1.166, negativeMonths))).toFixed(2)
 
     return(
         <div className="justify-content-center d-flex circle-wrapper">
@@ -30,11 +30,11 @@ function DonutSlide (props) {
             <div className="circle-data">
                 <p>Tu pago mensual</p>
                 <CurrencyFormat 
-                    value={monthlyPayment} 
+                    value={monthlyPayments} 
                     displayType={'text'} 
                     thousandSeparator={true} 
                     prefix={'$'} 
-                    renderText={value => <div className="currency">{value}</div>} />
+                    renderText={value => <p className="currency">{value}</p>} />
                 <p className="month">a {months} meses</p>
                 <p className="taxes">Tasa de interés <br/> 16.6%</p>
             </div>
